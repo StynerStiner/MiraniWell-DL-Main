@@ -14,11 +14,10 @@ import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import Banner from "@/components/banner";
 import { Button } from "@/components/ui/button";
 import { links } from "@/config";
 import { cn } from "@/lib/utils";
-
-import Banner from "./banner";
 
 export const Header = () => {
   const { isSignedIn } = useAuth();
@@ -49,15 +48,11 @@ export const Header = () => {
             </ClerkLoading>
             <ClerkLoaded>
               <SignedIn>
-                <UserButton afterSignOutUrl="/" />
+                <UserButton />
               </SignedIn>
 
               <SignedOut>
-                <SignInButton
-                  mode="modal"
-                  afterSignInUrl="/learn"
-                  afterSignUpUrl="/learn"
-                >
+                <SignInButton mode="modal">
                   <Button size="lg" variant="ghost">
                     Login
                   </Button>
