@@ -216,9 +216,19 @@ export const getUserSubscription = cache(async () => {
 
   if (!data) return null;
 
+  // Add a type guard for stripeCurrentPeriodEnd
+  const periodEnd: number =
+    typeof data.stripeCurrentPeriodEnd === "number"
+      ? data.stripeCurrentPeriodEnd
+      : (typeof data.stripeCurrentPeriodEnd === "object" &&
+         data.stripeCurrentPeriodEnd !== null &&
+         (data.stripeCurrentPeriodEnd as Date) instanceof Date
+        ? (data.stripeCurrentPeriodEnd as Date).getTime()
+        : 0);
+
   const isActive =
     data.stripePriceId &&
-    data.stripeCurrentPeriodEnd?.getTime() + DAY_IN_MS > Date.now();
+    periodEnd + DAY_IN_MS > Date.now();
 
   return {
     ...data,

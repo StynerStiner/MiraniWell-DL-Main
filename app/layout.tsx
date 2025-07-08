@@ -7,6 +7,7 @@ import { HeartsModal } from "@/components/modals/hearts-modal";
 import { PracticeModal } from "@/components/modals/practice-modal";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 import "./globals.css";
 
@@ -37,11 +38,13 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={font.className}>
-          <Toaster theme="light" richColors closeButton />
-          <ExitModal />
-          <HeartsModal />
-          <PracticeModal />
-          {children}
+          <LanguageProvider>
+            <Toaster theme="light" richColors closeButton />
+            <ExitModal />
+            <HeartsModal />
+            <PracticeModal />
+            {children}
+          </LanguageProvider>
         </body>
       </html>
     </ClerkProvider>
